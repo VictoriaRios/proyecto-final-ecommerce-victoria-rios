@@ -1,0 +1,19 @@
+{
+  "name": "tpfinal",
+  "version": "1.0.0",
+  "description": "Api de productos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Victoria Rios",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "firebase": "^11.9.1"
+  }
+}
