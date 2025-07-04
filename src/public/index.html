@@ -10,9 +10,9 @@
 </head>
 <body>
     <header class="text-center d-flex justify-content-center align-items-center bg-dark text-white py-3">
-        <h1>Eccomerce</h1>
+        <h1>API REST</h1>
     </header>
-   <main class="container">
+    <main class="container">
       <div class="container mt-5 mb-5">
         <h2 class="text-center ">¿Sobre qué trata esta API?</h2>
         <p class="mt-5">
@@ -22,6 +22,7 @@
           <li class="list-group-item"><strong class="text-primary">GET:</strong> Recupera la lista completa de zapatillas disponibles.</li>
           <li class="list-group-item"><strong class="text-primary">GET BY ID:</strong> Obtiene información detallada de una zapatilla específica mediante su identificador único.</li>
           <li class="list-group-item"><strong class="text-success">POST:</strong> Permite agregar nuevas zapatillas al sistema.</li>
+          <li class="list-group-item"><strong class="text-info">PATCH:</strong> Modifica la información de uno o más campos del articulo, sin necesidad de rescribir la información.</li>
           <li class="list-group-item"><strong class="text-warning">PUT:</strong> Actualiza la información de una zapatilla existente, identificada por su ID.</li>
           <li class="list-group-item"><strong class="text-danger">DELETE:</strong> Elimina una zapatilla del sistema utilizando su identificador único.</li>
         </ul>
@@ -64,15 +65,39 @@
                 <p>Este es el modelo que espera recibir la API:</p>
                     <pre>
                     {
-                        nombre: String,
+                        brand: String,
+                        color: String,
+                        name: String,
                         precio: Number,
-                        marca: String,
                     }
                     </pre>
             </div>
         </div>
 
         <div class="card col ms-4" style="width: 18rem">
+            <div class="card-body">
+                <span class="badge text-bg-info ">PATCH </span>
+                <strong>/api/sneakers/:id</strong>
+                <p class="card-text mt-2">
+                Modifica solo los campos enviados, dejando el resto igual. Esta operación requiere un ID válido para identificar el registro que se desea modificar.
+  
+                  
+                </p>
+                <p>Este es el modelo se mostrará al momento de editar:</p>
+                    <pre>
+                    {
+                        brand: String,
+                        color: String,
+                        name: String,
+                        precio: Number,
+                    }
+                    </pre>
+            </div>
+        </div>
+        </div>
+
+        <div class="row gap-4 mb-4">
+          <div class="card col ms-4" style="width: 18rem">
             <div class="card-body">
                 <span class="badge text-bg-warning ">PUT </span>
                 <strong>/api/sneakers/:id</strong>
@@ -84,16 +109,14 @@
                 <p>Este es el modelo se mostrará al momento de editar:</p>
                     <pre>
                     {
-                        nombre: String,
+                        brand: String,
+                        color: String,
+                        name: String,
                         precio: Number,
-                        marca: String,
                     }
                     </pre>
             </div>
         </div>
-        </div>
-
-        <div class="row gap-4 mb-4">
             <div class="card col ms-4 align-items-center" style="width: 18rem">
                 <div class="card-body">
                     <span class="badge text-bg-danger ">DELETE </span>

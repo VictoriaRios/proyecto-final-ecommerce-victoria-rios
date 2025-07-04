@@ -1,11 +1,13 @@
-import e, {Router} from 'express';
+import  {Router} from 'express';
 const router = Router();
 
-import {getProducts, getProductById, newProduct, editProduct, deleteById} from '../controllers/productsController.js';
+import {getProducts, getProductsByID, getProductByName, newProduct, patchProduct, editProduct, deleteById} from '../controllers/productsController.js';
 
-router.get('/sneakers', getProducts); //GET ALL
-router.get('/sneakers/:id', getProductById); //GET BY ID
+router.get('/sneakers', getProducts); //GET ALL ok
+router.get('/sneakers/name/:name', getProductByName);
+router.get('/sneakers/:id', getProductsByID); //GET BY ID
 router.post('/sneakers/', newProduct); //POST
+router.patch('/sneakers/:id', patchProduct); //PATCH BY ID
 router.put('/sneakers/:id', editProduct); // PUT BY ID
 router.delete('/sneakers/:id', deleteById); //DELETE BY ID
 
