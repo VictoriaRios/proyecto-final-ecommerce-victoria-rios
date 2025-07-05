@@ -1,6 +1,6 @@
-import { getAllProducts, getProductById, createProduct, patchProductById,  deleteProductById } from '../models/productsModel.js'
+import { getAllProducts, getProductById, createProduct, patchProductById,  deleteProductById ,updateProduct, getProductByBRAND } from '../models/productsModel.js'
 
-// GET ALL PRODUCTS
+// GET ALL PRODUCTS 
 export const getProducts = async (req, res) => {
     try {
         const products = await getAllProducts();
@@ -12,9 +12,24 @@ export const getProducts = async (req, res) => {
         console.error('Error obtaining the products:', error);
         res.status(500).json({ error: 'Error obtaining the products' });
     }
-};
+}; 
 
-// GET PRODUCT BY ID
+// GET PRODUCT BY BRAND 
+export const getProductByBrand = async (req,res) =>{
+    const brand = req.params.brand;
+    try{
+        const product = await getProductByBRAND(brand);
+        if (product.length === 0) {
+            return res.status(404).json({ error: 'No products found for this brand' });
+        }
+        res.status(200).json(product);
+    }catch (error) {
+        console.error('Error getting products by brand:', error);
+        res.status(500).json({ error: 'Error getting products by brand' });
+    }
+}
+
+// GET PRODUCT BY ID 
 export const getProductsByID = async (req, res) => {
     try {
         const product = await getProductById(req.params.id);
@@ -27,7 +42,7 @@ export const getProductsByID = async (req, res) => {
     }
 };
 
-// POST PRODUCT
+// POST PRODUCT 
 export const newProduct = async (req, res) => {
     const { brand, color, name, price } = req.body;
 
@@ -43,7 +58,7 @@ export const newProduct = async (req, res) => {
             price: parseFloat(price),
         };
 
-    const savedProduct = await createProduct(product);
+    const savedProduct = await createProduct(newProduct);
     res.status(201).json(savedProduct);
 
     } catch (error) {
@@ -52,7 +67,7 @@ export const newProduct = async (req, res) => {
     }
 };
 
-// PATCH PRODUCT
+// PATCH PRODUCT 
 export const patchProduct = async (req, res) => {
     const { id } = req.params;
     const updates = req.body;
@@ -69,7 +84,7 @@ export const patchProduct = async (req, res) => {
 };
 
 
-// UPDATE PRODUCT
+// UPDATE PRODUCT 
 export const editProduct = async (req, res) => {
     const { id } = req.params;
     const { brand, color, name, price } = req.body;
@@ -100,13 +115,13 @@ export const editProduct = async (req, res) => {
     }
 };
 
-// DELETE PRODUCT
+// DELETE PRODUCT 
 export const deleteById = async (req, res) => {
     try {
-        const result = await deleteProductById(req.params.id);
-        if (!result) return res.status(404).json({ error: 'Product not found' });
+        const product = await deleteProductById(req.params.id);
+        if (!product) return res.status(404).json({ error: 'Product not found' });
 
-        res.status(200).json({ message: 'Product deleted', id: result.id });
+        res.status(200).json({ message: 'Product deleted', id: product.id, name: product.name });
     } catch (error) {
         res.status(500).json({ error: 'Internal error' });
     }
