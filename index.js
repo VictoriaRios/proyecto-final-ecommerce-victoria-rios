@@ -9,8 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/api", (req, res) => {
-    res.json({ message: "API Rest en Node.js" });
+app.get("/", (req, res) => {
+    res.json({ message: "Recordá que para realizar peticiones debés estar logueado." });
 });
 
 
