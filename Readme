@@ -1,2 +1,234 @@
-Link Render: https://proyecto-final-ecommerce-victoria-rios.onrender.com
-Link Repositorio: https://github.com/VictoriaRios/proyecto-final-ecommerce-victoria-rios.git
+
+    📃 Descripción general
+        
+        🔹Esta API fue desarrollada como proyecto final del curso de Node.js brindado por Talt Tech (Adultos).
+
+        🔹 Permite gestionar productos de una tienda de zapatillas.
+
+        
+    ⚙️Funcionalidad
+
+        🔹Registrar y autenticar usuarios con JWT
+
+        🔹Crear, leer, actualizar y eliminar productos (CRUD)
+
+        🔹Buscar productos por ID o por marca
+
+        🔹Los datos se almacenan en Firebase Firestore, y la API está construida con Express.js.
+
+        🔹Está desplegada en Render, y puede ser testeada mediante herramientas como Postman.
+
+    🛠️ Tecnologías utilizadas
+
+        ▫️Node.js
+        ▫️Express.js
+        ▫️Firebase Firestore
+        ▫️JSON Web Tokens (JWT)
+        ▫️dotenv, cors, bcrypt
+
+
+    🔗 Links importantes
+
+        📍 Link Render: https://proyecto-final-ecommerce-victoria-rios.onrender.com
+
+        📍 Link Repositorio: https://github.com/VictoriaRios/proyecto-final-ecommerce-victoria-rios.git
+
+    📡 Conexiones
+
+        📍 Link de Render + / = Entry Point (GET)
+
+            🔸El Entry Point es la URL base desde la cual se accede a todos los recursos disponibles.
+
+            🔸 Mensaje que se muestra: "Recordá que para realizar peticiones debés estar logueado. \n La URL es /users/login".
+
+            🔸 No es necesario ingresar ningun dato en el body ni el token en el Header.
+            
+
+        📍 Link de Render + /users/login = Ruta para autenticar a un usuario registrado y obtener un token de acceso (JWT) para usar en rutas protegidas.
+
+            ⚠️ El modelo de JSON que espera el servidor en el body es:
+
+            {
+                "dni": Number,
+                "password": "string"
+            }
+
+            🔸El servidor responde con un token JWT en formato JSON. Ese token debe usarse en rutas protegidas (como POST, PUT, DELETE, etc.).
+            
+            💡 En Postman🚶🏼:
+
+                1️⃣ Seleccioná el método POST.
+
+                2️⃣ Pegá la URL completa:
+                https://proyecto-final-ecommerce-victoria-rios.onrender.com/users/login
+
+                3️⃣ Andá a la pestaña Body → seleccioná raw → tipo JSON.
+
+                4️⃣ Escribí el JSON con el correo y la contraseña.
+
+                5️⃣ Hacé clic en Send.
+
+                6️⃣ Copiá el token JWT que recibís para usarlo en el header de las demás rutas.
+
+
+        
+        📍 Link de Render + /users/register = Ruta para registrarse (POST)
+
+            ⚠️ El modelo de JSON que espera el servidor en el body es:
+
+            {
+                "dni": Number,
+                "email": "string",
+                "password": "string"
+            }
+
+
+            💡 En Postman🚶🏼:
+
+                1️⃣ Seleccioná el método POST.
+
+                2️⃣ Pegá la URL completa:
+                https://proyecto-final-ecommerce-victoria-rios.onrender.com/users/register
+
+                3️⃣ Andá a la pestaña Body → seleccioná raw → tipo JSON.
+
+                4️⃣ Escribí el JSON con el dni, correo y la contraseña.
+
+                5️⃣ Hacé clic en Send.
+
+                6️⃣ Logearte con la petición de arriba⬆️.
+
+
+    📥 Peticiones realizadas con **GET**
+
+        📍 Link de Render + /sneakers = Ruta para traer todos los productos cargados en la Base de Datos.
+
+            🔸 No es necesario enviar body en esta petición ni agregar informacion en la URL.
+
+
+        📍 Link de Render + /sneakers/brand/[nombre de la marca] = Ruta para traer todos los productos cargados en la Base de Datos pertenecientes a la marca indicada.
+
+            🔸 No es necesario enviar body en esta petición, solo el nombre de la marca en la URL.
+
+            🔸 Si no hay productos pertenecientes a la marca, el servidor devuelve un error 404 No products found for this brand.
+
+
+            💡 En Postman🚶🏼:
+
+                1️⃣ Seleccioná el método GET.
+
+                2️⃣ Ingresá la URL con el BTAND correspondiente.
+
+                3️⃣ En caso de autenticación, agregá el token en headers (Authorization: Bearer <token>).
+
+                4️⃣ Enviá la petición y verificá la respuesta.
+
+
+        📍 Link de Render + /sneakers/[id de Firebase] = Ruta para traer el producto cargado en la Base de Datos perteneciente al ID indicado.
+
+            🔸 No es necesario enviar body en esta petición, solo el ID en la URL.
+
+            🔸 Si el ID no existe, el servidor devuelve un error 404 Product Not Found.
+
+
+            💡 En Postman🚶🏼:
+
+                1️⃣ Seleccioná el método GET.
+
+                2️⃣ Ingresá la URL con el ID correspondiente.
+
+                3️⃣ En caso de autenticación, agregá el token en headers (Authorization: Bearer <token>).
+
+                4️⃣ Enviá la petición y verificá la respuesta.
+
+
+    📬 Petición realizada con **POST**
+
+        📍 Link de Render + /sneakers = Ruta para crear un nuevo producto.
+
+        ⚠️ El modelo de JSON que espera el servidor al momento de crear un nuevo producto es:
+
+            {
+                "brand": "string",
+                "name": "string",
+                "color": "string",
+                "price": Number
+            }
+
+        💡 En Postman🚶🏼 :
+
+            1️⃣ Vas a la pestaña Body.
+
+            2️⃣ Seleccionás el tipo, por ejemplo raw y luego JSON.
+
+            3️⃣ Escribís el JSON con la estructura que tu API espera.
+        
+
+    🛠️ Petición realizada con **PATCH**
+
+        📍 Link de Render + /sneakers/[id de Firebase] = Ruta para actualizar de manera PARCIAL los datos de un producto previamente cargado en la Base de Datos.
+
+        ⚠️ El modelo de JSON que espera el servidor al momento de actualizar un  producto SOLO en el campo color:
+
+            {
+                "color": "string",
+            }
+
+        ❗El método PATCH permite enviar solo los campos que querés modificar. NO necesitás enviar todo el objeto completo, SOLO lo que QUERES CAMBIAR.
+
+        💡 En Postman🚶🏼 :
+
+            1️⃣ Vas a la pestaña Body.
+
+            2️⃣ Seleccionás el tipo, por ejemplo raw y luego JSON.
+
+            3️⃣ Escribís el JSON con la estructura que tu API espera.
+
+
+    🧱 Petición realizada con **PUT**
+
+        📍 Link de Render + /sneakers/[id de Firebase] = Ruta para actualizar de manera TOTAL los datos de un producto previamente cargado en la Base de Datos.
+
+        ⚠️ El modelo de JSON que espera el servidor al momento de actualizar un  producto es:
+
+            {
+                "brand": "string",
+                "name": "string",
+                "color": "string",
+                "price": Number
+            }
+
+        ❗ El método PUT espera que envíes TODO el objeto completo con todos sus campos, aunque no quieras cambiar algunos. Si no envías algún campo obligatorio, ese dato puede BORRARSE o QUEDAR VACIO.
+
+        💡 En Postman🚶🏼:
+
+            1️⃣ Vas a la pestaña Body.
+
+            2️⃣ Seleccionás el tipo, por ejemplo raw y luego JSON.
+
+            3️⃣ Escribís el JSON con la estructura que tu API espera.
+
+
+
+    🗑️ Petición realizada con **DELETE**
+
+        📍 Link de Render + /sneakers/[id de Firebase] = Ruta para eliminar el producto de la Base de Datos perteneciente al id indicado.
+
+        🔸 No es necesario enviar body en esta petición, solo el ID en la URL.
+
+        🔸 Si la eliminación es exitosa, el servidor responde con un status 200 y un mensaje confirmando la eliminación.
+
+        🔸 Si el ID no existe, el servidor devuelve un error 404 Product Not Found.
+
+        🔸Esta ruta puede requerir autenticación (token JWT) para ser utilizada.
+
+
+        💡 En Postman🚶🏼:
+
+            1️⃣ Seleccioná el método DELETE.
+
+            2️⃣ Ingresá la URL con el ID correspondiente.
+
+            3️⃣ En caso de autenticación, agregá el token en headers (Authorization: Bearer <token>).
+
+            4️⃣ Enviá la petición y verificá la respuesta.

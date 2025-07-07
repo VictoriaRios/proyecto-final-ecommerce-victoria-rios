@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.json({ message: "Recordá que para realizar peticiones debés estar logueado." });
+    res.json({ message: "Recordá que para realizar peticiones debés estar logueado. \n La URL es /users/login" });
 });
 
 
